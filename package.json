@@ -9,7 +9,11 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "vue": "^3.2.38"
+    "axios": "^1.13.2",
+    "nanoid": "^5.1.6",
+    "pinia": "^3.0.4",
+    "vue": "^3.2.38",
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@types/node": "^16.11.56",
