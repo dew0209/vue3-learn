@@ -1,0 +1,50 @@
+1.customRef
+    hooks：useSumRef.ts
+    import {customRef } from "vue";
+
+    export default function(initValue:string,delay:number){
+    let msg = customRef((track,trigger)=>{
+            let timer:number
+            return {
+            get(){
+                track() // 告诉Vue数据msg很重要，要对msg持续关注，一旦变化就更新
+                return initValue
+            },
+            set(value){
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                initValue = value
+                trigger() //通知Vue数据msg变化了
+                }, delay);
+            }
+            }
+        })
+        return {msg}
+    }
+
+2.Teleport
+     Teleport 是一种能够将我们的 组件html结构 移动到指定位置的技术。
+
+     <teleport to='body' >
+        <div class="modal" v-show="isShow">
+        <h2>我是一个弹窗</h2>
+        <p>我是弹窗中的一些内容</p>
+        <button @click="isShow = false">关闭弹窗</button>
+        </div>
+    </teleport>
+
+3.Suspense
+    等待异步组件时渲染一些额外内容，让应用有更好的用户体验 
+    <template>
+        <div class="app">
+            <h3>我是App组件</h3>
+            <Suspense>
+            <template v-slot:default>
+                <Child/>
+            </template>
+            <template v-slot:fallback>
+                <h3>加载中.......</h3>
+            </template>
+            </Suspense>
+        </div>
+    </template>
